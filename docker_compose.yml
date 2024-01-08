@@ -1,0 +1,34 @@
+services:
+  prestashop:
+    image: krabbens/be_188587:latest
+    user: root
+    ports:
+      - 18866:443
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 2
+        window: 70s
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+    environment:
+      PS_INSTALL_AUTO: 1
+      DB_SERVER: db
+      DB_USER: root
+      DB_NAME: BE_188587
+      DB_PASSWD: student
+      PS_COUNTRY: pl
+      PS_LANGUAGE: pl
+    volumes:
+      - BE_188587:/var/www/html
+    networks:
+      - admin-mysql_default
+    entrypoint: /dbdump/import.sh
+networks:
+  admin-mysql_default:
+    external: true
+volumes:
+  BE_188587:
