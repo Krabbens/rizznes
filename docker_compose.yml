@@ -15,7 +15,7 @@ services:
           cpus: '0.5'
           memory: 512M
     environment:
-      PS_INSTALL_AUTO: 1
+      PS_INSTALL_AUTO: 0
       DB_SERVER: db
       DB_USER: root
       DB_NAME: BE_188587
